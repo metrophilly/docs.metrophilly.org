@@ -1,0 +1,62 @@
+name: Create Weekly Issues and Add to Project
+
+on:
+  schedule:
+    - cron: "0 12 * * 5" # Every Friday at noon
+  workflow_dispatch: # This allows manual triggering of the workflow
+
+jobs:
+  create_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Issue and Add to Project
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PAUL_MASTER_KEY }}
+          script: |
+            const issueTitle = '🎬 Livestream Configuration Checklist';
+            const issueBody = `**This is to ensure all livestream configurations are ready before Sunday Worship.**
+
+            ---
+
+            ### Guide for working on this task:
+
+            - [Walkthrough for Documentation](https://docs.google.com/document/d/1a4TKKc_wzeZQpRmYtNluZuHA99PP38EJtcRtW_ildsg/edit?usp=sharing)
+
+            ### Needed Links (open 'em all!):
+
+            - [Restream.io dashboard](https://app.restream.io/channel)
+            - [Sanity.io Studio dashboard](https://metrochurch.sanity.studio/desk/);`;
+
+            const labels = ['support-rotation'];
+
+            // Create an issue
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: issueTitle,
+              body: issueBody,
+              labels: labels
+            });
+
+            // For GitHub Projects (beta)
+            const projectId = 'PVT_kwDOBAyUw84Ag8CL';
+            const contentId = issue.data.node_id;
+
+            // GraphQL query to add the issue to the project
+            const query = `
+              mutation($projectId: ID!, $contentId: ID!) {
+                addProjectV2ItemById(input: {projectId: $projectId, contentId: $contentId}) {
+                  item {
+                    id
+                  }
+                }
+              }
+            `;
+
+            await github.graphql(query, {
+              projectId: projectId,
+              contentId: contentId
+            });
+
+            console.log(`Created and added issue to project: ${issue.data.html_url}`);
