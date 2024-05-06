@@ -11,23 +11,28 @@ jobs:
     steps:
       - name: Create Issue and Add to Project
         uses: actions/github-script@v7
+        env:
+          LIVESTREAM_ISSUE_ASSIGNEES: ${{ secrets.LIVESTREAM_ISSUE_ASSIGNEES }}
         with:
           github-token: ${{ secrets.PAUL_MASTER_KEY }}
           script: |
             const issueTitle = '🎬 Livestream Configuration Checklist';
-            const issueBody = `**This is to ensure all livestream configurations are ready before Sunday Worship.**
+            const issueBody = `
+              **This is to ensure all livestream configurations are ready before Sunday Worship.**
 
-            ---
+              ---
 
-            ### Guide for working on this task:
+              ### Guide for working on this task:
 
-            - [Walkthrough for Documentation](https://docs.google.com/document/d/1a4TKKc_wzeZQpRmYtNluZuHA99PP38EJtcRtW_ildsg/edit?usp=sharing)
+              - [Walkthrough for Documentation](https://docs.google.com/document/d/1a4TKKc_wzeZQpRmYtNluZuHA99PP38EJtcRtW_ildsg/edit?usp=sharing)
 
-            ### Needed Links (open 'em all!):
+              ### Needed Links (open 'em all!):
 
-            - [Restream.io dashboard](https://app.restream.io/channel)
-            - [Sanity.io Studio dashboard](https://metrochurch.sanity.studio/desk/);`;
+              - [Restream.io dashboard](https://app.restream.io/channel)
+              - [Sanity.io Studio dashboard](https://metrochurch.sanity.studio/desk/);
+            `;
 
+            const assignees = process.env.LIVESTREAM_ISSUE_ASSIGNEES.split(',');
             const labels = ['support-rotation'];
 
             // Create an issue
@@ -36,7 +41,8 @@ jobs:
               repo: context.repo.repo,
               title: issueTitle,
               body: issueBody,
-              labels: labels
+              labels: labels,
+              assignees: assignees
             });
 
             // For GitHub Projects (beta)
