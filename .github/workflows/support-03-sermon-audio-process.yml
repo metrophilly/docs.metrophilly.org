@@ -1,4 +1,4 @@
-name: Create Livestream Configuration Issue
+name: Create Sermon Audio Process Issue
 
 on:
   schedule:
@@ -15,29 +15,27 @@ jobs:
       - name: Create Issue and Add to Project
         uses: actions/github-script@v7
         env:
-          ASSIGNEES: ${{ secrets.LIVESTREAM_ISSUE_ASSIGNEES }}
+          ASSIGNEES: ${{ secrets.SERMON_AUDIO_SCRUB_ISSUE_ASSIGNEES }}
           PROJECT_ID: ${{ secrets.SUPPORT_ROTATION_PROJECT_ID }}
-          ISSUE_TITLE: "Support: 🎬 Livestream Configuration Checklist"
+          ISSUE_TITLE: "Support: 🎙 Sermon Audio Process & Upload"
           ISSUE_BODY: |
-            **This is to ensure all livestream configurations are ready before Sunday Worship.**
+            **This is to ensure the sermon audio is processed, scrubbed, and deployed to all podcast platforms and the website.**
 
-            **Due: By Saturday 6 PM**
+            **Due: By Monday 11 PM**
 
             ---
 
             ### Guide for working on this task:
 
-            - [Livestream Configuration Walkthrough](https://docs.google.com/document/d/1a4TKKc_wzeZQpRmYtNluZuHA99PP38EJtcRtW_ildsg/edit?usp=sharing)
+            - Clone and run the script at [https://github.com/metrophilly/sermon-processor](https://github.com/metrophilly/sermon-processor)
 
-            ### Needed Links (open 'em all!):
-
-            - [Restream.io dashboard](https://app.restream.io/channel)
-            - [Sanity.io Studio dashboard](https://metrochurch.sanity.studio/desk/)
+            - [Walkthrough for Documentation](https://docs.google.com/document/d/1E1Toca22oYXMhaz9miD8ygtUiUvyg4oU2EbFJIya3N8/edit?usp=sharing)
 
             ### Checklist
 
-            - [ ] Update and confirm "Livestream Event" data in Sanity Studio is correct
-            - [ ] Update Restream's "Social Alerts" content
+            - [ ] Process and scrub the sermon audio
+            - [ ] Upload processed audiofile to S3 bucket
+            - [ ] Update the "Sermon" document in Sanity to include the correct S3 path and deploy
 
         with:
           github-token: ${{ secrets.PAUL_MASTER_KEY }}

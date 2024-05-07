@@ -1,4 +1,4 @@
-name: Create Livestream Configuration Issue
+name: Create Post-Service Cleanup Issue
 
 on:
   schedule:
@@ -15,29 +15,30 @@ jobs:
       - name: Create Issue and Add to Project
         uses: actions/github-script@v7
         env:
-          ASSIGNEES: ${{ secrets.LIVESTREAM_ISSUE_ASSIGNEES }}
+          ASSIGNEES: ${{ secrets.POSTSERVICE_ISSUE_ASSIGNEES }}
           PROJECT_ID: ${{ secrets.SUPPORT_ROTATION_PROJECT_ID }}
-          ISSUE_TITLE: "Support: 🎬 Livestream Configuration Checklist"
+          ISSUE_TITLE: "Support: 🧹 Post-Service Media Cleanup"
           ISSUE_BODY: |
-            **This is to ensure all livestream configurations are ready before Sunday Worship.**
+            **This is to ensure all media cards are setup and ready for the week.**
 
-            **Due: By Saturday 6 PM**
+            **Due: By Sunday 11 PM**
 
             ---
 
             ### Guide for working on this task:
 
-            - [Livestream Configuration Walkthrough](https://docs.google.com/document/d/1a4TKKc_wzeZQpRmYtNluZuHA99PP38EJtcRtW_ildsg/edit?usp=sharing)
+            - [Post-Service Media Cleanup Walkthrough](https://docs.google.com/document/d/1NzRL9EhwmAUeHA0TT_mH2LCvOOw3PHdupisZ84ngkMM/edit?usp=sharing)
 
             ### Needed Links (open 'em all!):
 
-            - [Restream.io dashboard](https://app.restream.io/channel)
             - [Sanity.io Studio dashboard](https://metrochurch.sanity.studio/desk/)
+            - [Canva login](https://www.canva.com/)
 
             ### Checklist
 
-            - [ ] Update and confirm "Livestream Event" data in Sanity Studio is correct
-            - [ ] Update Restream's "Social Alerts" content
+            - [ ] Set Youtube video ID in Sanity Studio and deploy
+            - [ ] Create and add the Livestream Canva cover card to Youtube video
+            - [ ] Create Youtube timestamps, adjust the praise songs, passage, and sermon titles accordingly
 
         with:
           github-token: ${{ secrets.PAUL_MASTER_KEY }}
