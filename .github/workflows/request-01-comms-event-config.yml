@@ -1,0 +1,46 @@
+name: Auto-assign to new GitHub Project
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'comms-request')
+    steps:
+      - name: Auto-assign issue
+        uses: pozil/auto-assign-issue@v1
+        with:
+          assignees: paulhchoi,dhy6785,13jkim,ilgyo87,ellisPae,jessxu12
+          numOfAssignee: 2
+          allowSelfAssign: false
+
+      - name: Add Issue to Project
+        uses: actions/github-script@v7
+        env:
+          PROJECT_ID: ${{ secrets.METRO_SUPPORT_ROTATIONS_PROJECT_ID }}
+          GITHUB_TOKEN: ${{ secrets.PAUL_MASTER_KEY }}
+        with:
+          script: |
+            const projectId = process.env.PROJECT_ID;
+            const contentId = github.event.issue.node_id;
+
+            // GraphQL mutation to add the issue to the project
+            const mutation = `
+              mutation($projectId: ID!, $contentId: ID!) {
+                addProjectV2ItemById(input: {projectId: $projectId, contentId: $contentId}) {
+                  item {
+                    id
+                  }
+                }
+              }
+            `;
+
+            // Execute the GraphQL mutation
+            const result = await github.graphql(mutation, {
+              projectId: projectId,
+              contentId: contentId
+            });
+
+            console.log(`Issue added to project: ${result.addProjectV2ItemById.item.id}`);
