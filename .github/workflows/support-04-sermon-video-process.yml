@@ -37,6 +37,7 @@ jobs:
             - [ ] Create Canva card with "SERMON Card" template
             - [ ] Upload video into YouTube & attach canva card
             - [ ] Update the "Sermon" document in Sanity to include the correct YouTube ID and deploy
+            - [ ] When complete, shift card to "Ready to Review" and tag @$SUPPORT_REVIEWER
 
         with:
           github-token: ${{ secrets.PAUL_MASTER_KEY }}

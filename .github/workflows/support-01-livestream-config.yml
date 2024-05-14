@@ -38,6 +38,7 @@ jobs:
 
             - [ ] Update and confirm "Livestream Event" data in Sanity Studio is correct
             - [ ] Update Restream's "Social Alerts" content
+            - [ ] When complete, shift card to "Ready to Review" and tag @$SUPPORT_REVIEWER
 
         with:
           github-token: ${{ secrets.PAUL_MASTER_KEY }}
