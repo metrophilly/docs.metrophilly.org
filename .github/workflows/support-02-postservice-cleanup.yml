@@ -39,6 +39,7 @@ jobs:
             - [ ] Set Youtube video ID in Sanity Studio and deploy
             - [ ] Create and add the Livestream Canva cover card to Youtube video
             - [ ] Create Youtube timestamps, adjust the praise songs, passage, and sermon titles accordingly
+            - [ ] When complete, shift card to "Ready to Review" and tag @$SUPPORT_REVIEWER
 
         with:
           github-token: ${{ secrets.PAUL_MASTER_KEY }}

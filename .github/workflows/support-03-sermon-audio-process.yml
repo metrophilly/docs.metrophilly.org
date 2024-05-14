@@ -36,6 +36,7 @@ jobs:
             - [ ] Process and scrub the sermon audio
             - [ ] Upload processed audiofile to S3 bucket
             - [ ] Update the "Sermon" document in Sanity to include the correct S3 path and deploy
+            - [ ] When complete, shift card to "Ready to Review" and tag @$SUPPORT_REVIEWER
 
         with:
           github-token: ${{ secrets.PAUL_MASTER_KEY }}
