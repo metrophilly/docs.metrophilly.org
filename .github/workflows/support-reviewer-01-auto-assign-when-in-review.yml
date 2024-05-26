@@ -16,11 +16,14 @@ jobs:
         uses: actions/github-script@v7
         env:
           PROJECT_ID: ${{ secrets.SUPPORT_ROTATION_PROJECT_ID }}
+          SUPPORT_REVIEWER: ${{ vars.SUPPORT_REVIEWER }}
 
         with:
           github-token: ${{ secrets.PAUL_MASTER_KEY }}
           script: |
             const reviewer = $SUPPORT_REVIEWER
             const labels = ['support-rotation'];
+
+            console.log(reviewer)
 
             // 1. If any issue is moved the to "In Review" column of the PROJECT_ID, get that issue and tag the REVIEWER as an assignee
