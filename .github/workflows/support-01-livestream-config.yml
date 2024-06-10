@@ -2,7 +2,7 @@ name: Create Livestream Configuration Issue
 
 on:
   schedule:
-    - cron: "0 12 * * 5" # Every Friday at noon
+    - cron: "0 17 * * 5" # Every Friday at noon
   workflow_dispatch:
 
 jobs:
@@ -15,10 +15,20 @@ jobs:
       - name: Create Issue and Add to Project
         uses: actions/github-script@v7
         env:
-          ASSIGNEES: ${{ secrets.LIVESTREAM_ISSUE_ASSIGNEES }}
+          ASSIGNEES: ${{ vars.LIVESTREAM_ISSUE_ASSIGNEES }}
+          REVIEWERS: ${{ vars.SUPPORT_REVIEWERS }}
           PROJECT_ID: ${{ secrets.SUPPORT_ROTATION_PROJECT_ID }}
           ISSUE_TITLE: "Support: 🎬 Livestream Configuration Checklist"
-          ISSUE_BODY: |
+
+        with:
+          github-token: ${{ secrets.PAUL_MASTER_KEY }}
+          script: |
+            const assignees = process.env.ASSIGNEES.split(",").map(a => a.trim());
+            const reviewers = process.env.REVIEWERS.split(",").map(a => `@${a.trim()}`).join(" ");
+            const labels = ['support-rotation'];
+
+            const issueTitle = process.env.ISSUE_TITLE;
+            const issueBody = `
             **This is to ensure all livestream configurations are ready before Sunday Worship.**
 
             **Due: By Saturday 6 PM**
@@ -38,15 +48,8 @@ jobs:
 
             - [ ] Update and confirm "Livestream Event" data in Sanity Studio is correct
             - [ ] Update Restream's "Social Alerts" content
-            - [ ] When complete, shift card to "Ready to Review" and tag @$SUPPORT_REVIEWER
-
-        with:
-          github-token: ${{ secrets.PAUL_MASTER_KEY }}
-          script: |
-            const issueTitle = process.env.ISSUE_TITLE;
-            const issueBody = process.env.ISSUE_BODY;
-            const assignees = process.env.ASSIGNEES.split(',');
-            const labels = ['support-rotation'];
+            - [ ] When complete, shift card to "Ready to Review" and tag ${reviewers}
+            `;
 
             // Create the issue
             const issue = await github.rest.issues.create({
