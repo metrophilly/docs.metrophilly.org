@@ -2,7 +2,7 @@ name: Create Livestream Configuration Issue
 
 on:
   schedule:
-    - cron: "0 17 * * 5" # Every Friday at noon
+    - cron: "0 16 * * 5" # Every Friday at noon
   workflow_dispatch:
 
 jobs:
