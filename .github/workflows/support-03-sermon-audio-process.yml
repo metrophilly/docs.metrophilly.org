@@ -44,6 +44,7 @@ jobs:
             ### Checklist
 
             - [ ] Process and scrub the sermon audio
+              - [ ] Ensure that the file includes the closing prayer
             - [ ] Upload processed audiofile to S3 bucket
             - [ ] Update the "Sermon" document in Sanity to include the correct S3 path and deploy
             - [ ] When complete, shift card to "Ready to Review" and tag ${reviewers}
