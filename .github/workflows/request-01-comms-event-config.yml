@@ -12,6 +12,6 @@ jobs:
       - name: Auto-assign issue
         uses: pozil/auto-assign-issue@v1
         with:
-          assignees: paulhchoi,dhy6785,13jkim,ellisPae,jessxu12,bkong18,sunny-kwon,samyooo
+          assignees: dhy6785,13jkim,ellisPae,jessxu12,bkong18,GeminiReaper,sunny-kwon,samyooo
           numOfAssignee: 1
           allowSelfAssign: true

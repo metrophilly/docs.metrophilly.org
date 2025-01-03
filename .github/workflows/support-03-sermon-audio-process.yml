@@ -15,16 +15,12 @@ jobs:
       - name: Create Issue and Add to Project
         uses: actions/github-script@v7
         env:
-          ASSIGNEES: ${{ vars.SERMON_AUDIO_SCRUB_ISSUE_ASSIGNEES }}
-          REVIEWERS: ${{ vars.SUPPORT_REVIEWERS }}
           PROJECT_ID: ${{ secrets.SUPPORT_ROTATION_PROJECT_ID }}
           ISSUE_TITLE: "Support: 🎙 Sermon Audio Process & Upload"
 
         with:
-          github-token: ${{ secrets.PAUL_MASTER_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const assignees = process.env.ASSIGNEES.split(",").map(a => a.trim());
-            const reviewers = process.env.REVIEWERS.split(",").map(a => `@${a.trim()}`).join(" ");
             const labels = ['support-rotation'];
 
             const issueTitle = process.env.ISSUE_TITLE;
@@ -47,7 +43,7 @@ jobs:
               - [ ] Ensure that the file includes the closing prayer
             - [ ] Upload processed audiofile to S3 bucket
             - [ ] Update the "Sermon" document in Sanity to include the correct S3 path and deploy
-            - [ ] When complete, shift card to "Ready to Review" and tag ${reviewers}
+            - [ ] When complete, shift card to "Ready to Review" and tag this week's reviewer
             `;
 
             // Create the issue
@@ -56,8 +52,7 @@ jobs:
               repo: context.repo.repo,
               title: issueTitle,
               body: issueBody,
-              labels: labels,
-              assignees: assignees
+              labels: labels
             });
 
             // Add the issue to the project
