@@ -45,6 +45,8 @@ jobs:
             - [ ] Update and confirm "Livestream Event" data in Sanity Studio is correct
             - [ ] Update Restream's "Social Alerts" content
             - [ ] When complete, shift card to "Ready to Review" and tag this week's reviewer
+
+            cc: @paulhchoi
             `;
 
             // Create the issue

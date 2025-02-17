@@ -44,6 +44,8 @@ jobs:
             - [ ] Upload processed audiofile to S3 bucket
             - [ ] Update the "Sermon" document in Sanity to include the correct S3 path and deploy
             - [ ] When complete, shift card to "Ready to Review" and tag this week's reviewer
+
+            cc: @paulhchoi
             `;
 
             // Create the issue

@@ -46,6 +46,8 @@ jobs:
             - [ ] Create and add the Livestream Canva cover card to Youtube video
             - [ ] Create Youtube timestamps, adjust the praise songs, passage, and sermon titles accordingly
             - [ ] When complete, shift card to "Ready to Review" and tag this week's reviewer
+
+            cc: @paulhchoi
             `;
 
             // Create the issue
