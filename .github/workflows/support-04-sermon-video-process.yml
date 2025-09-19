@@ -28,7 +28,7 @@ jobs:
             const issueBody = `
             **This is to ensure the sermon-only video is clipped, processed, and deployed to Youtube and the website.**
 
-            **Due: By Monday 11 PM**
+            **Due: Scheduled to post by Tuesday 4 PM!**
 
             ---
 
@@ -42,8 +42,8 @@ jobs:
 
             - [ ] Process and review the sermon video
               - [ ] Ensure that the file includes the closing prayer
-            - [ ] Create Canva card with "SERMON Card" template
-            - [ ] Upload video into YouTube & attach canva card
+            - [ ] Get the Sermon graphics image from the slack #graphics channel
+            - [ ] Upload video into YouTube & attach graphics image
             - [ ] Update the "Sermon" document in Sanity to include the correct YouTube ID and deploy
             - [ ] When complete, shift card to "Ready to Review" and tag this week's reviewer
 
