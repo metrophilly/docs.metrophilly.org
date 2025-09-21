@@ -16,12 +16,19 @@ jobs:
         uses: actions/github-script@v7
         env:
           PROJECT_ID: ${{ secrets.SUPPORT_ROTATION_PROJECT_ID }}
-          ISSUE_TITLE: "Support: 🧹 Post-Service Media Cleanup"
 
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const labels = ['support-rotation'];
+
+            // dynamic title Logic
+            const today = new Date();
+            const sunday = new Date(today);
+            sunday.setDate(today.getDate() + 2);
+            const formattedDate = `${sunday.getMonth() + 1}/${sunday.getDate()}`;
+
+            const issueTitle = `Support: 🧹 Post-Service Livestream Cleanup for ${formattedDate}`;
 
             const issueTitle = process.env.ISSUE_TITLE;
             const issueBody = `
@@ -33,7 +40,7 @@ jobs:
 
             ### Guide for working on this task:
 
-            - [Post-Service Media Cleanup Walkthrough](https://docs.google.com/document/d/1NzRL9EhwmAUeHA0TT_mH2LCvOOw3PHdupisZ84ngkMM/edit?usp=sharing)
+            - [Post-Service Media Cleanup Walkthrough](https://docs.google.com/document/d/1a4TKKc_wzeZQpRmYtNluZuHA99PP38EJtcRtW_ildsg/edit?tab=t.ybj2bgj5tjwq)
 
             ### Needed Links (open 'em all!):
 

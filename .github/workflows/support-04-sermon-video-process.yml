@@ -24,7 +24,13 @@ jobs:
           script: |
             const labels = ['support-rotation'];
 
-            const issueTitle = process.env.ISSUE_TITLE;
+            // dynamic title Logic
+            const today = new Date();
+            const sunday = new Date(today);
+            sunday.setDate(today.getDate() + 2);
+            const formattedDate = `${sunday.getMonth() + 1}/${sunday.getDate()}`;
+
+            const issueTitle = `Support: 🎥 Sermon Video Process & Upload for ${formattedDate}`;
             const issueBody = `
             **This is to ensure the sermon-only video is clipped, processed, and deployed to Youtube and the website.**
 
@@ -36,7 +42,7 @@ jobs:
 
             - Clone and run the script at [https://github.com/metrophilly/sermon-processor](https://github.com/metrophilly/sermon-processor)
 
-            - Walkthrough TBD
+            - [Walkthrough for Documentation](https://docs.google.com/document/d/1a4TKKc_wzeZQpRmYtNluZuHA99PP38EJtcRtW_ildsg/edit?tab=t.cbu7cjc1m69)
 
             ### Checklist
 
@@ -44,6 +50,7 @@ jobs:
               - [ ] Ensure that the file includes the closing prayer
             - [ ] Get the Sermon graphics image from the slack #graphics channel
             - [ ] Upload video into YouTube & attach graphics image
+            - [ ] (wip) Generate the sermon title and description to set on the youtube video
             - [ ] Update the "Sermon" document in Sanity to include the correct YouTube ID and deploy
             - [ ] When complete, shift card to "Ready to Review" and tag this week's reviewer
 

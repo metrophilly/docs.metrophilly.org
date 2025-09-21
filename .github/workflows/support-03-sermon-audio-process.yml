@@ -16,14 +16,20 @@ jobs:
         uses: actions/github-script@v7
         env:
           PROJECT_ID: ${{ secrets.SUPPORT_ROTATION_PROJECT_ID }}
-          ISSUE_TITLE: "Support: 🎙 Sermon Audio Process & Upload"
 
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const labels = ['support-rotation'];
 
-            const issueTitle = process.env.ISSUE_TITLE;
+            // dynamic title Logic
+            const today = new Date();
+            const sunday = new Date(today);
+            sunday.setDate(today.getDate() + 2);
+            const formattedDate = `${sunday.getMonth() + 1}/${sunday.getDate()}`;
+
+            const issueTitle = `Support: 🎙 Sermon Audio Process & Upload for ${formattedDate}`;
+
             const issueBody = `
             **This is to ensure the sermon audio is processed, scrubbed, and deployed to all podcast platforms and the website.**
 
@@ -35,7 +41,7 @@ jobs:
 
             - Clone and run the script at [https://github.com/metrophilly/sermon-processor](https://github.com/metrophilly/sermon-processor)
 
-            - [Walkthrough for Documentation](https://docs.google.com/document/d/1E1Toca22oYXMhaz9miD8ygtUiUvyg4oU2EbFJIya3N8/edit?usp=sharing)
+            - [Walkthrough for Documentation](https://docs.google.com/document/d/1a4TKKc_wzeZQpRmYtNluZuHA99PP38EJtcRtW_ildsg/edit?tab=t.xzdkojyiaqio)
 
             ### Checklist
 
