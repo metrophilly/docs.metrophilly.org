@@ -30,7 +30,6 @@ jobs:
 
             const issueTitle = `Support: 🧹 Post-Service Livestream Cleanup for ${formattedDate}`;
 
-            const issueTitle = process.env.ISSUE_TITLE;
             const issueBody = `
             **This is to ensure all media cards are setup and ready for the week.**
 
